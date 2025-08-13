@@ -26,72 +26,162 @@
 
     <div class="pdf-description-box">
         <p class="pdf-description">
-            <strong>1. Introducción a CI/CD (Integración Continua / Despliegue Continuo)</strong>
+            <h3>GitHub Actions: Automatización de CI/CD</h3>
+                
+                <h4> Actions es una herramienta de CI/CD integrada en GitHub que permite automatizar tareas en repositorios.
+                A continuación se presenta un resumen de sus características, ventajas y desventajas, así como los conceptos clave de GitHub Actions, su relación con la Integración Continua (CI) y el Despliegue Continuo (CD), y su funcionalidad principal.
+                </h4>
+                <ul>
+                    <li><strong>Automatización:</strong> Permite definir flujos de trabajo que se ejecutan ante eventos específicos en el repositorio.</li>
+                    <li><strong>Integración Continua (CI):</strong> Automatiza pruebas y verificaciones en cada integración de código.</li>
+                    <li><strong>Despliegue Continuo (CD):</strong> Facilita la entrega automática del software a entornos de producción o pruebas.</li>
+                    <li><strong>Ventajas:</strong> Integración nativa con GitHub, facilidad de uso, acceso a un marketplace de acciones, soporte para contenedores y un plan gratuito generoso.</li>
+                    <li><strong>Desventajas:</strong> Menos flexible que otras herramientas avanzadas, costo por minuto y dependencia de la infraestructura de GitHub.</li>
+                </ul>
+
+                <h3>1. Introducción a CI/CD (Integración Continua / Despliegue Continuo)
+                CI/CD es un conjunto de prácticas de desarrollo de software que automatizan la integración y la entrega de código. El objetivo es garantizar la calidad del código y la entrega de software de manera eficiente y repetible.
+                </h3>
+                <br>
+                Principales tareas en el flujo de trabajo de desarrollo (previas a CI/CD):
+                <ul>
+                    <li>Desarrollar código en una rama de trabajo.</li>
+                    <li>Crear un Pull Request (PR) para integrar los cambios.</li>
+                    <li>Revisar el código y realizar pruebas.</li>
+                    <li>Fusionar el PR a la rama principal o de desarrollo.</li>
+                </ul>
+                Ramas de Git: Se trabaja con una rama principal (main) para el código en producción y una rama de desarrollo (dev) para el trabajo en progreso (working progress).
+                <br><br>
+                Creación de Ramas de Trabajo: Cada desarrollador crea su propia rama (por ejemplo, para una característica o un arreglo) a partir de dev o main.
+                <br><br>
+                Cambios y Pruebas Locales: El desarrollador realiza sus cambios y los prueba localmente.
+                <br><br>
+                Pull Request (PR): Una vez satisfecho con los cambios, el desarrollador crea un Pull Request para integrar su código (commits) a la rama de desarrollo o principal.
+                "Trust but verify" (Confía pero verifica): Esta es una filosofía clave en el desarrollo de software. 
+                <br><br>
+                Los PRs permiten visualizar las diferencias (diff) entre el estado anterior y posterior del código.
+                <br><br>
+                Revisión de Código: Otros desarrolladores revisan el PR, pueden hacer sugerencias o solicitar cambios. En empresas, suele haber un equipo o individuos específicos que aprueban los PRs.
+                <br><br>
+                Merge: Una vez aprobado, el código se fusiona con la rama destino (generalmente dev). La rama de trabajo del desarrollador se elimina.
+                <br><br>
+                ¿Qué añade la Integración Continua (CI)?
+                <br><br>
+                La CI automatiza la ejecución de una serie de pruebas y verificaciones sobre el código cada vez que se integra código al repositorio (por ejemplo, con un commit o un Pull Request). Esto asegura que el código cumpla con los estándares mínimos de calidad del proyecto.
+                <br><br>
+                Automatización de Tareas: Permite definir eventos (ej. commit, Pull Request, cambios en una rama específica) que disparan tareas automatizadas.
+                <br><br>
+                Ejemplos de Tareas Automatizadas: Compilar código, ejecutar tests, linting (verificar formato y estilo del código), crear imágenes de Docker, empujar imágenes a registros, conectarse a servidores, descargar y ejecutar código.
+                <br><br>
+                Salvaguardas (Safeguards): Los procesos de CI/CD incluyen mecanismos para detener el despliegue si algún paso falla (ej. si el código no pasa el linting, si hay errores de TypeScript). Esto "ataja los errores lo antes posible".
+                <br><br>
+                Previews Automáticos: Se pueden configurar despliegues automáticos a entornos de demostración (preview environments) para cada Pull Request, lo que facilita la revisión y demostración del trabajo en curso.
+                ¿Qué añade la Entrega Continua / Despliegue Continuo (CD)?
+                <br><br>
+                El CD es la automatización de la entrega del software a entornos de producción o intermedios (testing, staging). El proceso debe ser repetible y automatizable, generando confianza en su correcta ejecución. Evita la necesidad de listas de instrucciones manuales o pruebas masivas al final de un sprint.
+                <br><br>
+                <h3>2. GitHub Actions: Herramienta de CI/CD de GitHub</h3>
+                GitHub Actions es la herramienta de CI/CD integrada directamente con GitHub. Permite automatizar tareas en un repositorio utilizando "workflows" (flujos de trabajo).
+                <h4>2.1. Git vs. GitHub:</h4>
+                
+                Git: Es la herramienta de control de versiones distribuido utilizada por la mayoría de los desarrolladores.
+                GitHub: Es un servicio que aloja repositorios Git, facilitando la colaboración (ej. Pull Requests) y añadiendo funcionalidades adicionales que Git por sí solo no tiene.
+                <br>
+                <h4>2.2. Workflows en GitHub Actions:</h4>
+                
+                Son los archivos de configuración (.yml o .yaml) que definen las acciones a ejecutar.
+                <br><br>
+                Se almacenan en el repositorio, en la ruta .github/workflows/. Esto permite editarlos directamente desde el editor de GitHub o localmente con un editor de código.
+                <br><br>
+                Estructura del Archivo .yml: Basada en tabulaciones para agrupar el código (similar a Docker Compose o Python).
+                <br><br>
+                name: Nombre del workflow.
+                <br><br>
+                on: Define cuándo se va a ejecutar el workflow (eventos). Ejemplos de eventos: push (cada vez que se hace un push a una rama específica), pull_request, release, workflow_call (cuando es invocado por otro workflow).
+                <br><br>
+                jobs: Lista de tareas a ejecutar.
+                <br><br>
+                runs-on: Define en qué sistema operativo se ejecutará el "runner" (máquina virtual). Comúnmente ubuntu-latest.
+                <br><br>
+                steps: Secuencia de comandos o acciones a ejecutar.
+                <br><br>
+                run: Ejecuta comandos de shell (ej. Bash en Linux).
+                <br><br>
+                uses: Invoca acciones preexistentes (propias, de terceros o del Marketplace). Ej: actions/checkout@v4 para clonar el repositorio.
+                <br><br>
+                needs: Define dependencias entre jobs (un job se ejecuta si el job anterior se completó con éxito).
+                <br><br>
+                <h4>2.3. Runners:</h4>
+                
+                Son las máquinas virtuales efímeras donde se ejecutan los workflows.
+                GitHub proporciona los runners, eliminando la necesidad de configurarlos localmente.
+                Son "stateless" (sin estado persistente); se ejecutan, dejan el resultado en los logs y luego se cierran y limpian.
+                <br>
+                <h4>2.4. Marketplace de GitHub Actions:</h4>
+                
+                Un repositorio de acciones prehechas y probadas, mantenidas por GitHub o por terceros.
+                Permite reutilizar lógica compleja sin tener que escribirla desde cero.
+                <br>
+                </h4>2.5. Gestión de Secretos y Variables de Entorno:</h4>
+                
+                GitHub Actions permite almacenar variables de entorno y secretos (ej. credenciales, tokens de acceso) de forma segura.
+                Se configuran en la sección de "Settings" del repositorio (Secrets and variables > Actions).
+                Se acceden en los workflows usando secrets.NOMBRE_DEL_SECRETO o vars.NOMBRE_DE_VARIABLE. Esto evita poner información sensible directamente en el código del workflow.
+                Es común que cada repositorio tenga sus propias claves SSH y usuarios separados para mayor seguridad.
+                <br>
+                <h3>3. Ventajas de GitHub Actions</h3>
+                Integración Nativa con GitHub: Funciona directamente con los repositorios de GitHub sin configuración adicional.
+                Facilidad de Uso: Es relativamente sencillo de configurar y usar, especialmente si se utiliza Visual Studio Code con la extensión de GitHub Actions (que ofrece autocompletado).
+                Marketplace de Acciones: Acceso a una vasta colección de acciones predefinidas, lo que acelera el desarrollo de workflows complejos.
+                Soporte Nativo para Docker y Contenedores: Facilita la construcción y despliegue de imágenes Docker. GitHub también ofrece su propio registro de contenedores (GHCR).
+                Plan Gratuito Generoso: 2000 minutos de CI/CD al mes para repositorios privados y una cuota muy generosa para proyectos de código abierto (repositorios públicos).
+                Funcionalidades de Pull Request Avanzadas (en planes pagos de GitHub):Draft Pull Requests: Crear PRs como borradores para revisión temprana.
+                Requerir Revisores Específicos: Obligar a que ciertas personas aprueben un PR.
+                Múltiples Revisores: Solicitar que más de un desarrollador revise el código.
+                <br>
+                <h4> Desventajas de GitHub Actions<h4>
+                Menos Flexible/Configurable: Algunos consideran que es menos personalizable o flexible que Jenkins o GitLab CI/CD para ciertas configuraciones avanzadas.
+                Costo por Minuto: El valor por minuto de ejecución puede ser más caro que otras alternativas para usos intensivos.
+                Dependencia de GitHub: Si GitHub experimenta una caída, los procesos de CI/CD también se detendrán, creando una "dependencia de un solo proveedor" (single provider).
+                    <br>
+                <h3>5. Comparación con Otras Herramientas de CI/CD</h3>
+                Aunque los conceptos de CI/CD son universales, cada herramienta tiene sus particularidades:
+                    <br>
+                Jenkins:La herramienta de CI/CD más antigua mencionada.
+                <br>
+                De código abierto y altamente personalizable.
+                <br>
+                Se puede correr en infraestructura propia (on-premise), ofreciendo mayor control.
+                <br>
+                Puede ser más complejo de configurar.
+                <br>
+                GitLab CI/CD:Integrado con GitLab (análogo a GitHub Actions con GitHub).
+                <br>
+                Corre en la infraestructura de GitLab, con un tier gratuito y planes pagos.
+                <br>
+                CircleCI: Herramienta de CI/CD paga, también muy conocida.
+                <br>
+                Travis CI: Otra herramienta popular.
+                <br>
+                Bitbucket Pipelines: Solución de CI/CD para usuarios de Bitbucket.
+                <br>
+                Azure DevOps: Plataforma de CI/CD de Microsoft Azure.
+                <br>
+                Concepto Clave: "Si sabés trabajar con una herramienta de integración continua y despliegue continuo, transferir ese know-how a otra es relativamente sencillo". Las diferencias son principalmente sintácticas o de características específicas, no conceptuales.
+                <br>
+
+                <h3>6. Roles y Especialización</h3>
+                La mayoría de los programadores consumirán workflows/actions/pipelines ya desarrollados por otros.
+                Generalmente, el equipo de DevOps se encarga de configurar los pipelines o workflows.
+                Sin embargo, puede que en proyectos más pequeños o personales, los desarrolladores necesiten configurar estas herramientas por su cuenta.
+                Existen desarrolladores de DevOps especializados en estas herramientas.
+                        <br>
+                <h3>7. Uso Práctico y Futuro</h3>
+                GitHub Actions es una herramienta valiosa debido a su integración con GitHub (donde se aloja la mayoría del código abierto) y su facilidad de uso. Permite automatizar tareas repetitivas y garantizar la calidad del código, liberando a los desarrolladores para enfocarse en la lógica de negocio.
+                El próximo taller se enfocará en realizar un despliegue completo de un proyecto (ej. Next.js) a un servidor VPS usando GitHub Actions, configurando aspectos como Nginx para que la aplicación funcione en producción automáticamente cada vez que se actualiza.
+                GitHub Actions se integra prácticamente con cualquier framework o lenguaje de programación (Python, Java, JavaScript, TypeScript, PHP, C#), lo que lo hace muy versátil para automatizar procesos de CI/CD.
+                <br>
         </p>
-        <p>CI/CD es un conjunto de prácticas de desarrollo de software que automatizan la integración y la entrega de código. El objetivo es garantizar la calidad del código y la entrega de software de manera eficiente y repetible.</p>
-
-        <ul>
-            <li><strong>Ramas de Git:</strong> Se trabaja con una rama principal (main) para el código en producción y una rama de desarrollo (dev) para el trabajo en progreso (working progress).</li>
-            <li><strong>Creación de Ramas de Trabajo:</strong> Cada desarrollador crea su propia rama (por ejemplo, para una característica o un arreglo) a partir de dev o main.</li>
-            <li><strong>Cambios y Pruebas Locales:</strong> El desarrollador realiza sus cambios y los prueba localmente.</li>
-            <li><strong>Pull Request (PR):</strong> Una vez satisfecho con los cambios, el desarrollador crea un Pull Request para integrar su código (commits) a la rama de desarrollo o principal.</li>
-            <li><strong>Revisión de Código:</strong> Otros desarrolladores revisan el PR, pueden hacer sugerencias o solicitar cambios.</li>
-        </ul>
-
-        <p>
-            <strong>2. GitHub Actions: Herramienta de CI/CD de GitHub</strong>
-        </p>
-        <p>GitHub Actions es la herramienta de CI/CD integrada directamente con GitHub. Permite automatizar tareas en un repositorio utilizando "workflows" (flujos de trabajo).</p>
-
-        <ul>
-            <li><strong>Workflows en GitHub Actions:</strong> Son los archivos de configuración (.yml o .yaml) que definen las acciones a ejecutar.</li>
-            <li><strong>Runners:</strong> Son las máquinas virtuales efímeras donde se ejecutan los workflows.</li>
-            <li><strong>Marketplace de GitHub Actions:</strong> Un repositorio de acciones prehechas y probadas.</li>
-            <li><strong>Gestión de Secretos y Variables de Entorno:</strong> GitHub Actions permite almacenar variables de entorno y secretos de forma segura.</li>
-        </ul>
-
-        <p>
-            <strong>3. Ventajas de GitHub Actions</strong>
-        </p>
-        <ul>
-            <li>Integración Nativa con GitHub.</li>
-            <li>Facilidad de Uso.</li>
-            <li>Marketplace de Acciones.</li>
-            <li>Soporte Nativo para Docker y Contenedores.</li>
-        </ul>
-
-        <p>
-            <strong>4. Desventajas de GitHub Actions</strong>
-        </p>
-        <ul>
-            <li>Menos Flexible/Configurable.</li>
-            <li>Costo por Minuto.</li>
-            <li>Dependencia de GitHub.</li>
-        </ul>
-
-        <p>
-            <strong>5. Comparación con Otras Herramientas de CI/CD</strong>
-        </p>
-        <p>Aunque los conceptos de CI/CD son universales, cada herramienta tiene sus particularidades:</p>
-
-        <ul>
-            <li><strong>Jenkins:</strong> La herramienta de CI/CD más antigua mencionada. De código abierto y altamente personalizable.</li>
-            <li><strong>GitLab CI/CD:</strong> Integrado con GitLab (análogo a GitHub Actions con GitHub).</li>
-            <li><strong>CircleCI:</strong> Herramienta de CI/CD paga, también muy conocida.</li>
-            <li><strong>Travis CI:</strong> Otra herramienta popular.</li>
-            <li><strong>Bitbucket Pipelines:</strong> Solución de CI/CD para usuarios de Bitbucket.</li>
-            <li><strong>Azure DevOps:</strong> Plataforma de CI/CD de Microsoft Azure.</li>
-        </ul>
-
-        <p>
-            <strong>6. Roles y Especialización</strong>
-        </p>
-        <p>La mayoría de los programadores consumirán workflows/actions/pipelines ya desarrollados por otros. Generalmente, el equipo de DevOps se encarga de configurar los pipelines o workflows.</p>
-
-        <p>
-            <strong>7. Uso Práctico y Futuro</strong>
-        </p>
-        <p>GitHub Actions es una herramienta valiosa debido a su integración con GitHub (donde se aloja la mayoría del código abierto) y su facilidad de uso. Permite automatizar tareas repetitivas y garantizar la calidad del código, liberando a los desarrolladores para enfocarse en la lógica de negocio.</p>
     </div>
 
     <style>
@@ -157,6 +247,55 @@
         .pdf-description-box li {
             margin-bottom: 5px;
         }
+
+        .pdf-description {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.8;
+            font-size: 16px;
+            color: #f0f0f0;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .pdf-description strong {
+            color: #ffcc00;
+            font-size: 20px;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .pdf-description ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .pdf-description ul li {
+            margin-bottom: 10px;
+        }
+
+        .pdf-description br {
+            margin-bottom: 10px;
+        }
+
+        .pdf-description h1 {
+            font-size: 24px;
+            color: #ffcc00;
+            margin-top: 30px;
+        }
+
+        .pdf-description h2 {
+            font-size: 20px;
+            color: #ff9900;
+            margin-top: 20px;
+        }
+
+        .pdf-description h3 {
+            font-size: 18px;
+            color: #ff6600;
+            margin-top: 15px;
+        }
     </style>
 
     <script>
@@ -177,6 +316,13 @@
             lens.style.backgroundImage = `url(${img.src})`;
             lens.style.backgroundSize = `${img.width * 2}px ${img.height * 2}px`;
             lens.style.backgroundPosition = `-${lensX * 2}px -${lensY * 2}px`;
+        });
+
+        document.querySelectorAll('.pdf-description').forEach(description => {
+            description.innerHTML = description.innerHTML
+                .replace(/(\d+\.\d+\.\d+)/g, '<h3>$1</h3>') // Sub-subpuntos como 2.1.1
+                .replace(/(\d+\.\d+)/g, '<h2>$1</h2>')       // Subpuntos como 2.1
+                .replace(/(\d+\.)/g, '<h1>$1</h1>');          // Puntos principales como 1.
         });
     </script>
 </body>
