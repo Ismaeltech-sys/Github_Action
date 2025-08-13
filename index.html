@@ -10,7 +10,7 @@
     <div class="background-3d"></div>
     <div class="audio-container">
         <audio controls>
-            <source src="Media/Github and Git Essentials.mp3" type="audio/mpeg">
+            <source src="Media/GitHub_Actions Automatización.m4a" type="audio/mpeg">
             Tu navegador no soporta el elemento de audio.
         </audio>
     </div>
@@ -19,7 +19,166 @@
     <hr class="separator">
 
     <div class="pdf-container">
-        <img src="./Media/GITHUB Y GIT.webp" alt="Cheatsheet GitHub" class="pdf-viewer">
+        <div class="image-zoom-container">
+            <img src="./Media/GitHub Actions Esencial.png" alt="Cheatsheet GitHub" class="pdf-viewer">
+            <div class="zoom-lens"></div>
+        </div>
     </div>
+
+    <div class="pdf-description-box">
+        <p class="pdf-description">
+            <strong>1. Introducción a CI/CD (Integración Continua / Despliegue Continuo)</strong>
+        </p>
+        <p>CI/CD es un conjunto de prácticas de desarrollo de software que automatizan la integración y la entrega de código. El objetivo es garantizar la calidad del código y la entrega de software de manera eficiente y repetible.</p>
+
+        <ul>
+            <li><strong>Ramas de Git:</strong> Se trabaja con una rama principal (main) para el código en producción y una rama de desarrollo (dev) para el trabajo en progreso (working progress).</li>
+            <li><strong>Creación de Ramas de Trabajo:</strong> Cada desarrollador crea su propia rama (por ejemplo, para una característica o un arreglo) a partir de dev o main.</li>
+            <li><strong>Cambios y Pruebas Locales:</strong> El desarrollador realiza sus cambios y los prueba localmente.</li>
+            <li><strong>Pull Request (PR):</strong> Una vez satisfecho con los cambios, el desarrollador crea un Pull Request para integrar su código (commits) a la rama de desarrollo o principal.</li>
+            <li><strong>Revisión de Código:</strong> Otros desarrolladores revisan el PR, pueden hacer sugerencias o solicitar cambios.</li>
+        </ul>
+
+        <p>
+            <strong>2. GitHub Actions: Herramienta de CI/CD de GitHub</strong>
+        </p>
+        <p>GitHub Actions es la herramienta de CI/CD integrada directamente con GitHub. Permite automatizar tareas en un repositorio utilizando "workflows" (flujos de trabajo).</p>
+
+        <ul>
+            <li><strong>Workflows en GitHub Actions:</strong> Son los archivos de configuración (.yml o .yaml) que definen las acciones a ejecutar.</li>
+            <li><strong>Runners:</strong> Son las máquinas virtuales efímeras donde se ejecutan los workflows.</li>
+            <li><strong>Marketplace de GitHub Actions:</strong> Un repositorio de acciones prehechas y probadas.</li>
+            <li><strong>Gestión de Secretos y Variables de Entorno:</strong> GitHub Actions permite almacenar variables de entorno y secretos de forma segura.</li>
+        </ul>
+
+        <p>
+            <strong>3. Ventajas de GitHub Actions</strong>
+        </p>
+        <ul>
+            <li>Integración Nativa con GitHub.</li>
+            <li>Facilidad de Uso.</li>
+            <li>Marketplace de Acciones.</li>
+            <li>Soporte Nativo para Docker y Contenedores.</li>
+        </ul>
+
+        <p>
+            <strong>4. Desventajas de GitHub Actions</strong>
+        </p>
+        <ul>
+            <li>Menos Flexible/Configurable.</li>
+            <li>Costo por Minuto.</li>
+            <li>Dependencia de GitHub.</li>
+        </ul>
+
+        <p>
+            <strong>5. Comparación con Otras Herramientas de CI/CD</strong>
+        </p>
+        <p>Aunque los conceptos de CI/CD son universales, cada herramienta tiene sus particularidades:</p>
+
+        <ul>
+            <li><strong>Jenkins:</strong> La herramienta de CI/CD más antigua mencionada. De código abierto y altamente personalizable.</li>
+            <li><strong>GitLab CI/CD:</strong> Integrado con GitLab (análogo a GitHub Actions con GitHub).</li>
+            <li><strong>CircleCI:</strong> Herramienta de CI/CD paga, también muy conocida.</li>
+            <li><strong>Travis CI:</strong> Otra herramienta popular.</li>
+            <li><strong>Bitbucket Pipelines:</strong> Solución de CI/CD para usuarios de Bitbucket.</li>
+            <li><strong>Azure DevOps:</strong> Plataforma de CI/CD de Microsoft Azure.</li>
+        </ul>
+
+        <p>
+            <strong>6. Roles y Especialización</strong>
+        </p>
+        <p>La mayoría de los programadores consumirán workflows/actions/pipelines ya desarrollados por otros. Generalmente, el equipo de DevOps se encarga de configurar los pipelines o workflows.</p>
+
+        <p>
+            <strong>7. Uso Práctico y Futuro</strong>
+        </p>
+        <p>GitHub Actions es una herramienta valiosa debido a su integración con GitHub (donde se aloja la mayoría del código abierto) y su facilidad de uso. Permite automatizar tareas repetitivas y garantizar la calidad del código, liberando a los desarrolladores para enfocarse en la lógica de negocio.</p>
+    </div>
+
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .pdf-container {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .image-zoom-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .pdf-container img {
+            max-width: 100%;
+        }
+
+        .zoom-lens {
+            position: absolute;
+            border: none;
+            width: 300px; /* Duplicado el tamaño de la lupa */
+            height: 300px; /* Duplicado el tamaño de la lupa */
+            border-radius: 50%;
+            visibility: hidden;
+            pointer-events: none;
+            background-repeat: no-repeat;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .image-zoom-container:hover .zoom-lens {
+            visibility: visible;
+        }
+
+        .image-zoom-container:hover img {
+            cursor: crosshair;
+        }
+
+        .pdf-description-box {
+            border: 1px solid #444;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #222;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .pdf-description-box p {
+            margin: 10px 0;
+        }
+
+        .pdf-description-box ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .pdf-description-box li {
+            margin-bottom: 5px;
+        }
+    </style>
+
+    <script>
+        const imageContainer = document.querySelector('.image-zoom-container');
+        const img = imageContainer.querySelector('img');
+        const lens = imageContainer.querySelector('.zoom-lens');
+
+        imageContainer.addEventListener('mousemove', (e) => {
+            const rect = img.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const lensX = x - lens.offsetWidth / 2;
+            const lensY = y - lens.offsetHeight / 2;
+
+            lens.style.left = `${Math.max(0, Math.min(lensX, rect.width - lens.offsetWidth))}px`;
+            lens.style.top = `${Math.max(0, Math.min(lensY, rect.height - lens.offsetHeight))}px`;
+            lens.style.backgroundImage = `url(${img.src})`;
+            lens.style.backgroundSize = `${img.width * 2}px ${img.height * 2}px`;
+            lens.style.backgroundPosition = `-${lensX * 2}px -${lensY * 2}px`;
+        });
+    </script>
 </body>
 </html>
