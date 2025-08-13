@@ -156,7 +156,7 @@
 
 - Se define el evento que dispara el workflow, por ejemplo  on: push  a la rama main.
 
-- Se configura un job que se ejecuta en un runner Ubuntu y contiene un step que ejecuta un comando bash simple, como  echo "Hola Don Web" .
+- Se configura un job que se ejecuta en un runner Ubuntu y contiene un step que ejecuta un comando bash simple, como  echo "Hola MUNDO" .
 
 - Al hacer commit y push del archivo, el workflow se ejecuta automáticamente y se puede ver el resultado en la pestaña Actions de GitHub.
 
